@@ -8,26 +8,24 @@
 
 <div class = "login">
 
-    <h1>Login</h1>
+    <h1 id="head">Login</h1>
 
     <form method="POST" action="">
         {% csrf_token %}
-        <table>
+        <table id="table-login">
             <tr>
-                <td>Username: </td>
+                <td id="login-text">Username: </td>
                 <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
             </tr>
                     
             <tr>
-                <td>Password: </td>
+                <td id="login-text">Password: </td>
                 <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
             </tr>
-
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
         </table>
+        <br>
+             <td><input class="btn login_btn" type="submit" value="Login" id="button-login"></td>
+         </br>
     </form>
 
     {% if messages %}
@@ -37,7 +35,7 @@
             {% endfor %}
         </ul>
     {% endif %}     
-        
+    <br></br>
     Belum mempunyai akun? <a href="{% url 'wishlist:register' %}">Buat Akun</a>
 
 </div>

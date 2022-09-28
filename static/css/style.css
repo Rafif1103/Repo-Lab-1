@@ -1,0 +1,55 @@
+body{
+    background-color: rgb(236, 230, 230);
+}
+table{
+    border: 2px solid rgb(144, 133, 123);
+    align-content: center;
+    width: 60%;    
+    border-spacing: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th{
+    border: 1px solid rgb(109, 108, 106);
+    background-color: rgb(162, 160, 120);
+}
+
+td{
+    padding: 15px;
+    border: 1px solid rgb(109, 108, 106);
+    font-family: 'Lucida Handwriting';
+    background-color: beige;
+    text-align: left;
+}
+
+#button-login{
+    background-color: azure;
+    padding: 10px 6%;
+    margin-top: 13px;
+}
+
+#button-register{
+    border: 2px solid rgb(144, 133, 123);
+    background-color: rgb(210, 202, 114);
+    padding: 10px 10%;
+    margin-top: 15px;
+    text-decoration: none;
+}
+
+#head{
+    text-align: center
+}
+
+.login, .wishlist, #login-text{
+    text-align: center;
+}
+
+#table-login{
+    width: 40%;
+}
+
+#cookies{
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
