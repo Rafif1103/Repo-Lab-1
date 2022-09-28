@@ -1,14 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-<nav class="navbar navbar-inverse">
+<nav class="navbar" style="background-color: #d9f06e;">
     <div class="container-fluid">
-      </div>
-      <ul class="nav navbar-nav">
-        <li><h5>{{nama}}</h5></li>
-        <li><a href="{% url 'wishlist:logout' %}">Logout</a></li>
-      </ul>
+      <span class="navbar-brand mb-0 h1">Rafif Naufal Rahmadika</span>
+      <a class="btn btn-info" href="{% url 'wishlist:logout' %}" role="button">Logout</a>
+    
     </div>
-  </nav>
+</nav>
 
 <div class="wishlist">
     <h5>Nama: </h5>
