@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block content %}
+<nav class="navbar" style="background-color: #d9f06e;">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1">Rafif Naufal Rahmadika</span>
+      <h5 id="cookies">Sesi terakhir login: {{ last_login }}</h5>
+      <a class="btn btn-info" href="{% url 'wishlist:logout' %}" role="button">Logout</a>
+    
+    </div>
+</nav>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+                $.get("/wishlist/json", function(data){
+                    data.map((singleData) =>
+                $('#table-content').append(`<tr>
+                <td>${singleData.fields.nama_barang}</td>
+                <td>${singleData.fields.harga_barang}</td>
+                <td>${singleData.fields.deskripsi}</td>
+                </tr>`)
+                    );
+                });
+            })
+
+    
+    $(document).ready(function() { 
+        $("#submit-wishlist").submit(function(e) {
+            const formData = {
+                csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+                nama_barang: $('#nama-barang').val(),
+                harga_barang: parseInt($('#harga-barang').val()),
+                deskripsi: $('#deskripsi-barang').val(),
+            };console.log(formData);
+            $.ajax({
+                url: '/wishlist/ajax/submit/',
+                type: 'POST',
+                dataType: 'json',
+                encode: true,
+                data: formData,             
+                
+            }).done(function (data) {
+        $('#message').text(data.message);
+             });;
+             e.preventDefault();
+        });
+    });
+</script>
+
+<div class="wishlist">
+    <h5>Nama: </h5>
+    <p>{{nama}}</p>
+
+    <form id = "submit-wishlist" method="POST">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Nama Barang</td>
+                <td><input type="text" name="nama-barang" id="nama-barang"></td>
+            </tr>
+            <tr>
+                <td>Harga Barang</td>
+                <td><input type="text" name="harga-barang" id="harga-barang"></td>
+            </tr>
+            <tr>
+                <td>Deskripsi Barang</td>
+                <td><input type="text" name="deskripsi-barang" id="deskripsi-barang"></td>
+            </tr>
+            <tr>
+                <td><input type="submit" name="simpan" id="simpan" value="Simpan"></td>
+            </tr>
+        </table>
+    </form>
+    <table>
+        <tr>
+        <th>Nama Barang</th>
+        <th>Harga Barang</th>
+        <th>Deskripsi</th>
+        </tr>
+        <tbody id = "table-content"></tbody>
+    </table> 
+    <a id="button-register" href="{% url 'wishlist:logout' %}">Logout</a>
+    <a id="button-register" href="{% url 'wishlist:add_barang' %}">Tambah Task</a>
+</div>
+{% endblock content %}

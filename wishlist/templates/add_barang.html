@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function() { 
+        $("#submit-wishlist").submit(function(e) {
+            e.preventDefault();
+            const formData = {
+                csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+                nama_barang: $('#nama-barang').val(),
+                harga_barang: parseInt($('#harga-barang').val()),
+                deskripsi: $('#deskripsi-barang').val(),
+            };
+            $.ajax({
+                url: '/wishlist/ajax/submit',
+                type: 'POST',
+                dataType: 'json',
+                encode: true,
+                data: formData,             
+                success: function(data) {               
+                document.getElementById("submit-wishlist").reset();
+                $('#status').html(data);              
+                }
+            });
+        });
+    });
+</script>
+
+<form id = "submit-wishlist" method="POST">
+    <table>
+        <tr>
+            <td>Nama Barang</td>
+            <td><input type="text" name="nama-barang" id="nama-barang"></td>
+        </tr>
+        <tr>
+            <td>Harga Barang</td>
+            <td><input type="text" name="harga-barang" id="harga-barang"></td>
+        </tr>
+        <tr>
+            <td>Deskripsi Barang</td>
+            <td><input type="text" name="deskripsi-barang" id="deskripsi-barang"></td>
+        </tr>
+        <tr>
+            <td><input type="submit" name="simpan" id="simpan" value="Simpan"></td>
+        </tr>
+    </table>
+</form>
+
+{% endblock content %}
